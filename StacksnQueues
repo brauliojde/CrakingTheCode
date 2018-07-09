@@ -46,7 +46,96 @@ public class Solution {
             
             
         }
-        return bracesMatch;
+        return bracesMatch;import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+public class Solution {
+
+
+
+    private static final Scanner scanner = new Scanner(System.in);
+    
+    public static boolean testBraces(String expr){
+        int strlen = expr.length();
+        
+        /*Checks to make sure there is an even amount of braces*/
+        if(strlen % 2 != 0){
+            return false;
+        }
+        
+        Stack braces =  new Stack();
+        String match = "";
+        
+        for(int i = 0; i < strlen ;i++){
+            String temp = Character.toString(expr.charAt(i));
+            
+            /**/
+            if(i>0){
+                
+                if(temp.equals(")")){
+                    match = "(";
+                } else if(temp.equals("}")){
+                    match = "{";
+                }else if(temp.equals("]")){
+                    match = "[";
+                } else {match = "t";}
+                
+                if(!braces.empty()){
+                    String p = braces.peek().toString();
+                    // System.out.println("P is: " + p);
+                    // System.out.println("Match is: " + match);
+                    // System.out.println("Temp is : " + temp);
+                    if(p.equals(match)){
+                        braces.pop();
+                        // System.out.println("POP");
+                    } else{
+                        braces.push(temp);
+                    }
+                    
+                } else{braces.push(temp);}
+                
+                
+
+
+                
+                
+            }else{
+                braces.push(temp);
+            }
+            
+        }
+        
+        /*Checks to make sure stack is empty
+        if empty then all braces were matched*/
+        if(!braces.empty()){
+            return false;
+        } else{return true;}
+        
+    }
+    
+    public static void main(String[] args) {
+        int t = scanner.nextInt();
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+        for (int tItr = 0; tItr < t; tItr++) {
+            String expression = scanner.nextLine();
+            if(testBraces(expression)){
+                System.out.println("YES");
+            } else{ System.out.println("NO");}
+        }
+        
+        
+        scanner.close();
+    }
+    
+
+    
+}
     }
     
     public static void main(String[] args) {
